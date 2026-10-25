@@ -1,0 +1,22 @@
+{% component post_title(page) %}
+    <header class="post__header">
+        <h1 class="post__title">
+            <a href="{{ page.permalink }}">{{ page.title }}</a>
+        </h1>
+        <div class="post__meta">
+            <span class="post__time">{{ page.date | date(format="%F") }}</span>
+            {% if page.taxonomies?.categories %}
+                {% for category in page.taxonomies.categories %}
+                <div class="post__category">
+                    <a href="{{ get_taxonomy_url(kind="categories", term=category) }}">{{ category }}</a>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </header>
+{% endcomponent post_title %}
+
+{# Usage in markdown: {% <katex block={true}> %}E = mc^2{% </katex> %} #}
+{% component katex(block = false) %}
+<script type="math/tex{% if block %};mode=display{% endif %}">{{ body | safe }}</script>
+{% endcomponent katex %}

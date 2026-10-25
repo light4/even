@@ -1,5 +1,4 @@
 {% extends "index.html" %}
-{% import "post_macros.html" as post_macros %}
 
 {% block title %}{{config.title}} - {{page.title}}{% endblock title %}
 
@@ -32,7 +31,7 @@
 {% endif %}
 
 <article class="post">
-    {{ post_macros::title(page=page) }}
+    {{ <post_title page={page} /> }}
     <div class="post-content">
       {{ page.content | safe }}
     </div>
@@ -42,10 +41,10 @@
 
     <div class="post-footer">
         {% block page_footer %}
-            {% if page.taxonomies.tags %}
+            {% if page.taxonomies?.tags %}
                 <div class="post-tags">
                     {% for tag in page.taxonomies.tags %}
-                        <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}">#{{ tag }}</a>
+                        <a href="{{ get_taxonomy_url(kind="tags", term=tag) }}">#{{ tag }}</a>
                     {% endfor %}
                 </div>
             {% endif %}

@@ -1,6 +1,8 @@
 # Even
 Even is a clean, responsive theme based on the Hugo theme with the same name featuring categories, tags and pagination.
 
+Requires Zola 0.23 or later (Tera 2). Use an older commit of this theme for Zola <= 0.22.
+
 ![even screenshot](https://github.com/getzola/even/blob/master/screenshot.png?raw=true)
 
 ## Contents
@@ -15,7 +17,7 @@ First download this theme to your `themes` directory:
 
 ```bash
 cd themes
-git clone https://github.com/getzola/even.git
+git clone https://github.com/light4/even.git
 ```
 and then enable it in your `config.toml`:
 
@@ -67,6 +69,14 @@ The site title is shown on the header. As it might be different from the `<title
 element that the `title` field in the config represents, you can set the `even_title`
 instead.
 
+### Syntax highlighting
+Configure the highlighting theme in your `config.toml` (any [giallo built-in theme](https://github.com/getzola/giallo#built-in)):
+
+```toml
+[markdown.highlighting]
+theme = "github-light"
+```
+
 ### KaTeX math formula support
 
 This theme contains math formula support using [KaTeX](https://katex.org/),
@@ -78,13 +88,13 @@ of `config.toml`:
 katex_enable = true
 ```
 
-After enabling this extension, the `katex` short code can be used in documents:
-* `{{ katex(body="\KaTeX") }}` to typeset a math formula inlined into a text,
+After enabling this extension, the `katex` component can be used in documents:
+* `{% <katex> %}\KaTeX{% </katex> %}` to typeset a math formula inlined into a text,
   similar to `$...$` in LaTeX
-* `{% katex(block=true) %}\KaTeX{% end %}` to typeset a block of math formulas,
+* `{% <katex block={true}> %}\KaTeX{% </katex> %}` to typeset a block of math formulas,
   similar to `$$...$$` in LaTeX
 
-#### Automatic rendering without short codes
+#### Automatic rendering without components
 
 Optionally, `\\( \KaTeX \\)` inline and `\\[ \KaTeX \\]` / `$$ \KaTeX $$`
 block-style automatic rendering is also supported, if enabled in the config:
